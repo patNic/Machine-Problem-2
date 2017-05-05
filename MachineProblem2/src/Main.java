@@ -11,7 +11,9 @@ public class Main extends JFrame
 	GUI g = new GUI();
 	public Main()
 	{
-		new SplashScreen(5000);
+		SplashScreen splash= new SplashScreen(5000);
+		splash.showSplashAndExit();
+		
 		ImageIcon icon= new ImageIcon("src/images/imagecom.png");
 		Image image= icon.getImage();
 		JFrame frame= new JFrame();

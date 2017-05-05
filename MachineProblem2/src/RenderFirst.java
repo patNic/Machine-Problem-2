@@ -1,12 +1,12 @@
 import java.io.*;
 
-public class FileTry
+public class RenderFirst
 {
 	public File file;
 	public static int width;
 	public static int height;
 	public char[] cbuf ;
-	public FileTry(File f)
+	public RenderFirst(File f)
 	{
 		file=f;
 	}
@@ -35,12 +35,10 @@ public class FileTry
 	        if(ind>1)
 	        {
 	             binaryString = new String[ind-1];
-	        	System.out.println(" :Positive: ");
 	        }
 	        else
 	        {
 	        	binaryString = new String[cbuf.length];
-	        	System.out.println(" :Negative: ");
 	        }
 	        FileWriter w= new FileWriter(file);
 	        int counter=1;
@@ -69,7 +67,6 @@ public class FileTry
 	        	{
 	        		while(d!= (7-c))
 		        	{
-		        		System.out.println(" While loop at filetry. ");
 		        		temp+="0";
 		        		--d;
 		        	}
@@ -78,7 +75,6 @@ public class FileTry
 	        	{
 	        		while(d!= (7-c))
 		        	{
-		        		System.out.println(" While loop at filetry. ");
 		        		temp+="0";
 		        		++d;
 		        	}
@@ -89,7 +85,6 @@ public class FileTry
 	        {
 	        	w.write(binaryString[i]);
 	        }
-	        System.out.println("I am done at FileTRy write");
 	        width= Integer.parseInt(two[0]);
 	        height= Integer.parseInt(two[1]);
 	        read.close();

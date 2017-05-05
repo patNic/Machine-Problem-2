@@ -35,7 +35,7 @@ public class GUI extends JPanel
 	public File toComp;
 	public File path;
 	 BufferedImage buff;
-	 Trial trial = new Trial();
+	 Compression trial = new Compression();
 	public static boolean isEnabled=true;
 	public static boolean toShow=true;
 	public static JPanel panel = new BackGroundPanel();
@@ -47,6 +47,7 @@ public class GUI extends JPanel
 	boolean train = false;
 	public static Thread thread;
 	public static boolean finish = false;
+	boolean renderBool = false;
 	public GUI(Boolean start){}
 	public GUI()
 	{
@@ -125,7 +126,7 @@ public class GUI extends JPanel
 		upButtons[19].setBounds(770, 320, upButtonIcon[21].getIconWidth(), upButtonIcon[21].getIconHeight());
 		upButtons[22].setBounds(740, 480, upButtonIcon[22].getIconWidth(), upButtonIcon[22].getIconHeight());
 		upButtons[23].setBounds(330, 44, upButtonIcon[25].getIconWidth(), upButtonIcon[25].getIconHeight());
-		upButtons[24].setBounds(340, 87, upButtonIcon[24].getIconWidth(), upButtonIcon[24].getIconHeight());
+		upButtons[24].setBounds(330, 87, upButtonIcon[24].getIconWidth(), upButtonIcon[24].getIconHeight());
 		upButtons[26].setBounds(745, 150, upButtonIcon[26].getIconWidth(), upButtonIcon[26].getIconHeight());
 		upButtons[27].setBounds(80, 50, upButtonIcon[27].getIconWidth(), upButtonIcon[27].getIconHeight());
 		upButtons[28].setBounds(211, 450, upButtonIcon[29].getIconWidth(), upButtonIcon[29].getIconHeight());
@@ -445,6 +446,7 @@ public class GUI extends JPanel
 					panel.remove(upButtons[8]);
 					panel.remove(upButtons[23]);
 					panel.remove(upButtons[24]);
+					panel.remove(upButtons[30]);
 					
 					panel.add(upButtons[11]);
 					panel.add(creditsButton);
@@ -466,15 +468,16 @@ public class GUI extends JPanel
 					panel.remove(descButton);
 					panel.remove(upButtons[12]);
 					panel.remove(upButtons[13]);
-					
+
 					panel.add(upButtons[0]);
-					panel.add(upButtons[1]);
 					panel.add(upButtons[2]);
 					panel.add(upButtons[6]);
-					panel.add(upButtons[7]);
 					panel.add(upButtons[8]);
-					panel.add(upButtons[23]);
-					panel.add(upButtons[24]);
+					
+					if(renderBool){
+						panel.add(upButtons[23]);
+						panel.add(upButtons[24]);
+					}
 					
 					panel.repaint();
 					panel.revalidate();
@@ -482,7 +485,7 @@ public class GUI extends JPanel
 				else if(e.getSource()==upButtons[22])
 				{
 					upButtons[22].setIcon(upButtonIcon[22]);
-					
+					renderBool = false;
 					panel.remove(upButtons[16]);
 					panel.remove(upButtons[18]);
 					panel.remove(upButtons[19]);
@@ -491,13 +494,9 @@ public class GUI extends JPanel
 					panel.remove(upButtons[35]);
 					
 					panel.add(upButtons[0]);
-				//	panel.add(upButtons[1]);
 					panel.add(upButtons[2]);
 					panel.add(upButtons[6]);
-				//	panel.add(upButtons[7]);
-			       panel.add(upButtons[8]);
-					//panel.add(upButtons[23]);
-					//panel.add(upButtons[24]);
+			        panel.add(upButtons[8]);
 					
 					upButtons[22].setIcon(upButtonIcon[22]);
 					panel.repaint();
@@ -515,6 +514,7 @@ public class GUI extends JPanel
 					panelPic.repaint();
 					panelPic.revalidate();
 					panel.removeAll();
+					renderBool = false;
 					init();
 					panelPic.repaint();
 					panelPic.revalidate();
@@ -523,6 +523,7 @@ public class GUI extends JPanel
 				}
 				else if(e.getSource()==upButtons[13])
 				{
+					renderBool = false;
 					panelPic.removeAll();
 					panelPic.repaint();
 					panelPic.revalidate();
@@ -535,6 +536,7 @@ public class GUI extends JPanel
 				
 				else if(e.getSource()==upButtons[0])
 				{
+					renderBool = false;
 					upButtons[0].setIcon(upButtonIcon[0]);
 					panel.remove(upButtons[0]);
 					panel.remove(upButtons[1]);
@@ -548,6 +550,7 @@ public class GUI extends JPanel
 					panel.remove(upButtons[26]);
 					panel.remove(upButtons[25]);
 					panel.remove(upButtons[24]);
+					panel.remove(upButtons[30]);
 					
 					panel.add(upButtons[16]);
 					panel.add(upButtons[18]);
@@ -560,6 +563,7 @@ public class GUI extends JPanel
 				
 				if(e.getSource()==upButtons[23])
 				{
+					panel.remove(upButtons[30]);
 					upButtons[23].setIcon(upButtonIcon[26]);
 					panel.remove(upButtons[0]);
 					panel.remove(upButtons[1]);
@@ -605,7 +609,7 @@ public class GUI extends JPanel
 							
 								 panelPic.removeAll();
 								 panelPic.repaint();
-								 RenderPanel can= new RenderPanel(buff.getWidth(), buff.getHeight(), Trial.pix2D);
+								 RenderPanel can= new RenderPanel(buff.getWidth(), buff.getHeight(), Compression.pix2D);
 								  scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 								  scroll.getViewport().setOpaque(false);
 								  scroll.setOpaque(false);
@@ -614,7 +618,6 @@ public class GUI extends JPanel
 						          panelPic.add(scroll);
 						          panelPic.repaint();
 								 panelPic.revalidate(); 
-								 //upButtons[32].setVisible(false);
 								 
 							 
 				          chooser.getSelectedFiles();
@@ -622,15 +625,13 @@ public class GUI extends JPanel
 				        else
 				        {
 				        	panel.add(upButtons[0]);
-							panel.add(upButtons[1]);
 							panel.add(upButtons[2]);
 							panel.add(upButtons[6]);
-							panel.add(upButtons[7]);
 							panel.add(upButtons[8]);
 							panel.add(upButtons[23]);
 							panel.add(upButtons[24]);
 							
-							//upButtons[32].setEnabled(true);
+							panel.remove(upButtons[32]);
 							panel.remove(upButtons[27]);
 							panel.repaint();
 							panel.revalidate();
@@ -693,7 +694,7 @@ public class GUI extends JPanel
 					        else
 					        {
 					        	BufferedWriter w= new BufferedWriter(new FileWriter(f));
-					        	trial= new Trial(buff, w);
+					        	trial= new Compression(buff, w);
 					        	 HashMap<String,String> readMap = trial.readHuffFile(readFile);
 					        	trial.compress(buff, f, readMap);
 					        }
@@ -775,7 +776,7 @@ public class GUI extends JPanel
 				}
 				if(e.getSource()==openButton)
 				{
-					trial= new Trial();
+					trial= new Compression();
 					String name="FileName: ";
 					JTextArea textArea= new JTextArea(10, 10);
 					textArea.setBounds(75, 550, 500, 220);
@@ -806,8 +807,6 @@ public class GUI extends JPanel
 				          {}
 				        
 				          chooser.getSelectedFile().getName();
-				          System.out.println("You chose to open this file: " +
-				                  chooser.getSelectedFile().getName());
 				          name+=chooser.getSelectedFile().getName();
 				          textArea.setText(name);
 				         
@@ -843,7 +842,7 @@ public class GUI extends JPanel
 				if(e.getSource()==upButtons[18])
 				{
 						JFileChooser saver = new JFileChooser("./");
-							 FileNameExtensionFilter filter= new FileNameExtensionFilter("HUFF", "*.HUFF");
+					    FileNameExtensionFilter filter= new FileNameExtensionFilter("HUFF", "*.HUFF");
 							 
 							saver.addChoosableFileFilter(filter);
 							saver.setAcceptAllFileFilterUsed(false);
@@ -867,12 +866,13 @@ public class GUI extends JPanel
 							        panel.repaint();
 							        panel.revalidate();
 					        }
+				
 					        BufferedWriter writer = null;
 					          
 			            try
 			            {
 			            	writer = new BufferedWriter( new FileWriter(file));
-			            	trial= new Trial(buff, writer);
+			            	trial= new Compression(buff, writer);
 			            	hasTrained=true;
 			            }
 			            catch (IOException exp)
@@ -906,26 +906,25 @@ public class GUI extends JPanel
 					 chooser.addChoosableFileFilter(filter);
 					 chooser.setAcceptAllFileFilterUsed(false);
 				        
-					// JLabel rendered= new JLabel(chooser.getSelectedFile());
 				        int option = chooser.showOpenDialog(panel);
 				        
 				        if (option == JFileChooser.APPROVE_OPTION) {
 							 File open = chooser.getSelectedFile();
 								 panelPic.removeAll();
 								 panelPic.repaint();
-								 Trial tryAl = new Trial();
+								 Compression tryAl = new Compression();
 								
 								 String renderName= chooser.getSelectedFile().getName();
 								 String corHuff= renderName.substring(0, renderName.length()-7)+".HUFF";
 								 File renderPath= chooser.getCurrentDirectory();
 								
-								 FileTry tr= new FileTry(open);
+								 RenderFirst tr= new RenderFirst(open);
 								 File ff= new File(renderPath, corHuff);
 								 try
 								 {
 									 File fil= tr.convertToBin();
 									 HashMap<String, String> readMap = tryAl.readHuffFile(ff);
-									 tryAl.writeCodes(open, FileTry.width, FileTry.height, fil, readMap);
+									 tryAl.writeCodes(open, RenderFirst.width, RenderFirst.height, fil, readMap);
 									 
 									 FileWriter w = new FileWriter(open);
 									 w.write(tr.cbuf);
@@ -936,7 +935,7 @@ public class GUI extends JPanel
 									 except.printStackTrace();
 								 }
 								 
-								 RenderPanel can= new RenderPanel(FileTry.width, FileTry.height, Trial.pix2D);
+								 RenderPanel can= new RenderPanel(RenderFirst.width, RenderFirst.height, Compression.pix2D);
 								  scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 								  scroll.getViewport().setOpaque(false);
 								  scroll.setOpaque(false);
@@ -972,6 +971,7 @@ public class GUI extends JPanel
 					panel.remove(upButtons[24]);
 					panel.remove(upButtons[10]);
 					panel.remove(upButtons[16]);
+					panel.remove(upButtons[22]);
 					
 					panel.add(upButtons[33]);
 					panel.add(upButtons[17]);
@@ -979,7 +979,7 @@ public class GUI extends JPanel
 					panel.repaint();
 					panel.revalidate();
 					
-					
+					renderBool = true;
 				       try
 				       {   
 					        File f= new File(path,toComp.getName() +".CYCOLE");
@@ -995,7 +995,7 @@ public class GUI extends JPanel
 					        else
 					        {
 					        	BufferedWriter w= new BufferedWriter(new FileWriter(f));
-					        	trial= new Trial(buff, w);
+					        	trial= new Compression(buff, w);
 					        	 HashMap<String,String> readMap = trial.readHuffFile(ff);
 					        	trial.compress(buff, f, readMap);
 					        }  
@@ -1014,28 +1014,19 @@ public class GUI extends JPanel
 	public void init2()
 	{
 		panel.add(upButtons[0]);
-		
-		//panel.add(upButtons[1]);
 		panel.add(upButtons[2]);
 		panel.add(upButtons[6]);
-	//	panel.add(upButtons[7]);
 		panel.add(upButtons[8]);
-		//panel.add(upButtons[23]);
-		//panel.add(upButtons[24]);
-		
 		panel.add(action);
 	}
 	public void init3()
 	{
 		panel.add(upButtons[0]);
-	
 		panel.add(upButtons[2]);
 		panel.add(upButtons[6]);
-
 		panel.add(upButtons[8]);
 		panel.add(upButtons[23]);
 		panel.add(upButtons[24]);
-		
 		panel.add(action);
 	}
 }

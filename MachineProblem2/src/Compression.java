@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class Trial 
+public class Compression 
 {
 	int[] pixels;
 	public static int[][] pix2D;
@@ -20,10 +20,9 @@ public class Trial
 	String[] myString;
 	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 	HashMap<String, String> printmap = new HashMap<String, String>();
-	public Trial(){}
-	public Trial(BufferedImage image, BufferedWriter write) throws IOException
+	public Compression(){}
+	public Compression(BufferedImage image, BufferedWriter write) throws IOException
 	{
-		long start= System.currentTimeMillis();
 		pixels = image.getRGB(0,0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
 		thisImage= image;
 	    width = image.getWidth();
@@ -39,8 +38,6 @@ public class Trial
 	     
 	    }
 	    writeHuff(write);
-	    long end= System.currentTimeMillis();
-	    System.out.println("Time: "+ (end-start));
 	}
 	public void codedString()
 	{
@@ -59,7 +56,6 @@ public class Trial
 	}
 	public BufferedImage compress(BufferedImage image, File f, HashMap<String, String> readMap)
 	{	  
-			long start= System.currentTimeMillis();
 			HashMap<Integer, Integer> comp = new HashMap<Integer, Integer>();
 			for (Entry<String, String> entry : readMap.entrySet()) {
 	            comp.put(Integer.parseInt(entry.getKey()), Integer.parseInt(entry.getValue()));
@@ -110,7 +106,6 @@ public class Trial
 		    GUI.upButtons[33].setIcon(GUI.upButtonIcon[34]);
 		    GUI.upButtons[33].repaint();
 		    long end= System.currentTimeMillis();
-		    System.out.println("Time: "+ (end-start));
 		    return image;
 	}
 	public void decode(char[] c ,Node root)
@@ -273,7 +268,6 @@ public class Trial
 		myRoot=nodeQueues.peek();
 		size = comp.size();
 		long end= System.currentTimeMillis();
-	    System.out.println("Time build tree: "+ (end-start));
 	}
 	public void printCodes(Node root, StringBuffer code)
 	{ 
